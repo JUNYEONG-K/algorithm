@@ -1,3 +1,4 @@
+import heapq
 import uuid
 from collections import deque
 
@@ -518,6 +519,20 @@ def bfs2178(graph, start_x, start_y, n, m):
                 q.append((nx, ny))
                 graph[nx][ny] = graph[x][y] + 1
 
+
+def dijkstrat(start):
+    q = []
+    distance[start] = 0
+    heapq.heappush(q, (distance[start], start))
+    while q:
+        dist, now = heapq.heappop()
+        if distance[now] < dist:
+            continue
+        for next_node, next_cost in graph[now]:
+            cost = dist + next_cost
+            if cost < distance[next_node]:
+                distance[next_node] = cost
+                heapq.heappush(q, (distance[next_node], next_node))
 
 _2178()
 # _16401()
